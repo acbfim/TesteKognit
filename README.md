@@ -8,6 +8,9 @@ Os projetos estão juntos na mesma pasta.
  - Login: admin
  - Senha: admin
 
+### Comandos para iniciar
+      npm i --force (instalar dependencias)
+      ng s -o (rodar projeto)
 
  ## Backend
  
