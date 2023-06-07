@@ -1,0 +1,82 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
+
+  <mat-sidenav-container class="example-sidenav-container" autosize>
+
+
+
+    <mat-sidenav style="width: 250px;" class="sidenad-left" #sidenav [opened]="isDesktop"
+      [mode]="mobileQuery.matches ? 'over' : 'side'" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+      [fixedInViewport]="true">
+      <div class="nav-logo">
+        <a class="" [routerLink]="['../']">
+          <img class="logo" src="/assets/images/logo.png" width="180px"></a>
+      </div>
+
+
+      <mat-divider class="mx-2"></mat-divider>
+
+      <mat-nav-list class="nav">
+        <div *ngFor="let item of menu">
+          <a mat-list-item *ngIf="!item.items" 
+          [routerLinkActiveOptions]="{exact: false}" 
+          [routerLink]="item.link" 
+          (click)="navigateTo(item.link)"
+          class=""
+            routerLinkActive="active-link">
+             <div class="d-flex">
+                <mat-icon class="me-4">{{item.icon}}</mat-icon>
+                <label class="" style="font-size: 14px;font-weight: 500;">{{item.name}}</label>
+             </div>
+          </a>
+
+          <mat-expansion-panel #panel *ngIf="item.items" [class.mat-elevation-z0]="true"
+            class="sidenad-left {{panel.expanded ? 'opened' : ''}}" style="margin-left: -0.75rem;">
+            <mat-expansion-panel-header class="ms-1">
+              <mat-icon class="">{{item.icon}}</mat-icon>
+              <label class="ms-4" style="margin-left: 10px">{{item.name}}</label>
+
+            </mat-expansion-panel-header>
+            <mat-nav-list >
+              <a *ngFor="let i of item.items" mat-list-item routerLink="{{i.link}}" class=""
+                (click)="navigateTo(i.link)" routerLinkActive="active-link">
+                <div class="d-flex">
+                  <mat-icon class="" style="font-size: 20px;">{{i.icon}}</mat-icon>
+                  <label class="ms-2">{{i.name}}</label>
+               </div>
+              </a>
+
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </div>
+      </mat-nav-list>
+
+
+
+
+
+
+    </mat-sidenav>
+
+
+
+
+
+    <mat-sidenav-content>
+      <app-default-header [sidenavValue]=sidenav></app-default-header>
+
+      <div class="" [ngClass]="!isDesktop ? '' : '' " style="padding: 15px; margin-top: 60px;">
+        <router-outlet></router-outlet>
+      </div>
+
+
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
+
+
+
+
